@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Professors</title>
+    <link rel="icon" href="https://img.icons8.com/ios-glyphs/30/teacher.png" type="image/png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Professors List</h1>
+        <div class="mb-4 text-center">
+            <a href="{{ url_for('add_professor') }}" class="btn btn-primary">Add New professor</a>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Back to Home</a>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Subjects</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for professor in professors %}
+                <tr>
+                    <td>{{ professor.id }}</td>
+                    <td>{{ professor.name }}</td>
+                    <td>{{ professor.email }}</td>
+                    <td>{{ professor.contact }}</td>
+                    <td>{{ professor.subjects }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
