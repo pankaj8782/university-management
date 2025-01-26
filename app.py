@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for
 from models import db, Student, Professor, Course
-
+import os
 
 app = Flask(__name__)
 
