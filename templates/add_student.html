@@ -1,48 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Student</title>
-    <link rel="icon" href="https://img.icons8.com/ios-glyphs/30/student-registration.png" type="image/png">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Student</title>
+  <link rel="icon" href="https://img.icons8.com/ios-glyphs/30/student-registration.png" type="image/png">
+  <!-- Bootstrap 4.5.2 CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <style>
+    /* CSS Variables for Easy Theme Management */
+    :root {
+      --primary-color: #6c63ff;
+      --secondary-color: #3f3d56;
+      --light-color: #ffffff;
+      --dark-color: #343a40;
+      --border-radius: 10px;
+      --transition-speed: 0.3s;
+    }
+
+    /* Global Styles */
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #e0eafc, #cfdef3);
+      margin: 0;
+      padding: 0;
+      color: var(--dark-color);
+    }
+
+    .container {
+      margin-top: 3rem;
+      max-width: 600px;
+    }
+
+    /* Card Layout */
+    .card {
+      background-color: var(--light-color);
+      border: none;
+      border-radius: var(--border-radius);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+    }
+
+    /* Header Styling */
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--dark-color);
+    }
+
+    /* Form Element Styles */
+    .form-group label {
+      font-weight: 500;
+      color: var(--dark-color);
+    }
+
+    .form-control {
+      border-radius: var(--border-radius);
+      border: 1px solid #ccc;
+      transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+    }
+
+    .form-control:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 8px rgba(108, 99, 255, 0.5);
+    }
+
+    /* Button Styles */
+    .btn {
+      border-radius: var(--border-radius);
+      padding: 0.5rem 1.5rem;
+      transition: background-color var(--transition-speed), transform var(--transition-speed);
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      border: none;
+      color: var(--light-color);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background-color: var(--secondary-color);
+      border: none;
+      color: var(--light-color);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+  </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1>Add New Student</h1>
-        <form method="POST">
-            <div class="form-group">
-                <label for="student_id">Student ID</label>
-                <input type="text" id="student_id" name="student_id" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="age">Age</label>
-                <input type="number" id="age" name="age" class="form-control" required>
-            </div>
-
-            <!-- Department (Dropdown based on available courses) -->
-            <div class="form-group">
-                <label for="department">Department</label>
-                <select class="form-control" name="department" id="department" required>
-                    <option value="">Select Course</option>
-                    {% for course in courses %}
-                        <option value="{{ course.name }}">{{ course.name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Add Student</button>
-            <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
-        </form>
+  <div class="container mt-5">
+    <div class="card">
+      <h1>Add New Student</h1>
+      <form method="POST">
+        <div class="form-group">
+          <label for="student_id">Student ID</label>
+          <input type="text" id="student_id" name="student_id" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" id="age" name="age" class="form-control" required>
+        </div>
+        <!-- Department (Dropdown based on available courses) -->
+        <div class="form-group">
+          <label for="department">Department</label>
+          <select class="form-control" name="department" id="department" required>
+            <option value="">Select Course</option>
+            {% for course in courses %}
+              <option value="{{ course.name }}">{{ course.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Student</button>
+        <a href="{{ url_for('index') }}" class="btn btn-secondary">Cancel</a>
+      </form>
     </div>
+  </div>
 
-    <!-- Bootstrap JS, Popper.js, and jQuery (Optional) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Bootstrap JS, Popper.js, and jQuery (Optional) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,35 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Student</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edit Student</title>
+  <!-- Bootstrap 4.5.2 CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  <style>
+    /* CSS Variables for Theme Management */
+    :root {
+      --primary-color: #6c63ff;
+      --secondary-color: #3f3d56;
+      --light-color: #ffffff;
+      --dark-color: #343a40;
+      --border-radius: 10px;
+      --transition-speed: 0.3s;
+    }
+    
+    /* Global Styles */
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #e0eafc, #cfdef3);
+      margin: 0;
+      padding: 0;
+      color: var(--dark-color);
+    }
+    
+    .container {
+      margin-top: 3rem;
+    }
+    
+    /* Card Layout for Form */
+    .card {
+      background-color: var(--light-color);
+      border: none;
+      border-radius: var(--border-radius);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: var(--dark-color);
+      font-size: 2.5rem;
+      font-weight: 600;
+    }
+    
+    /* Form Element Styles */
+    .form-group label {
+      font-weight: 500;
+      color: var(--dark-color);
+    }
+    
+    .form-control {
+      border-radius: var(--border-radius);
+      border: 1px solid #ccc;
+      transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+    }
+    
+    .form-control:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 8px rgba(108, 99, 255, 0.5);
+    }
+    
+    /* Button Styles */
+    .btn {
+      border-radius: var(--border-radius);
+      padding: 0.5rem 1.5rem;
+      transition: background-color var(--transition-speed), transform var(--transition-speed);
+    }
+    
+    .btn-primary {
+      background-color: var(--primary-color);
+      border: none;
+      color: var(--light-color);
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+    
+    .btn-secondary {
+      background-color: var(--secondary-color);
+      border: none;
+      color: var(--light-color);
+    }
+    
+    .btn-secondary:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+    
+    /* Centering Button Group */
+    .btn-group {
+      text-align: center;
+    }
+    
+    .btn + .btn {
+      margin-left: 0.5rem;
+    }
+  </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1>Edit Student</h1>
-        <form method="POST">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" class="form-control" value="{{ student.name }}" required>
-            </div>
-            <div class="form-group">
-                <label for="age">Age</label>
-                <input type="number" id="age" name="age" class="form-control" value="{{ student.age }}" required>
-            </div>
-            <div class="form-group">
-                <label for="department">Department</label>
-                <input type="text" id="department" name="department" class="form-control" value="{{ student.department }}" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Update</button>
-            <a href="{{ url_for('view_students') }}" class="btn btn-secondary">Cancel</a>
-        </form>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="https://res.cloudinary.com/ds6um53cx/image/upload/v1739173072/mlea1txwo73qvsibhls0.png" alt="University Logo" width="40" height="40" class="me-2">
+        University Management
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('contact_us') }}">Contact Us</a>
+          </li>
+        </ul>
+      </div>
     </div>
+  </nav>
+  <div class="container">
+    <div class="card">
+      <h1>Edit Student</h1>
+      <form method="POST">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" class="form-control" value="{{ student.name }}" required>
+        </div>
+        <div class="form-group">
+          <label for="age">Age</label>
+          <input type="number" id="age" name="age" class="form-control" value="{{ student.age }}" required>
+        </div>
+        <div class="form-group">
+          <label for="department">Department</label>
+          <input type="text" id="department" name="department" class="form-control" value="{{ student.department }}" required>
+        </div>
+        <div class="btn-group text-center">
+          <button type="submit" class="btn btn-primary">Update</button>
+          <a href="{{ url_for('view_students') }}" class="btn btn-secondary">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
 
-    <!-- Bootstrap JS, Popper.js, and jQuery (Optional) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Bootstrap JS, Popper.js, and jQuery (Optional) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

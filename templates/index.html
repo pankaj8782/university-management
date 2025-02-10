@@ -1,139 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>University Management System</title>
-    <link rel="icon" href="https://img.icons8.com/fluency/48/university.png" type="image/png">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        /* Custom card styles */
-        .custom-card {
-            background-color: white;
-            border-radius: 25px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>University Management System</title>
+  <link rel="icon" href="https://img.icons8.com/forma-bold-filled/24/university.png" type="image/png" />
 
-        /* Hover effects */
-        .custom-card:hover {
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            transform: translateY(-5px);
-        }
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-        .card-body {
-            padding: 2rem;
-            text-align: center;
-        }
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
 
-        .btn-block {
-            border-radius: 25px;
-        }
-        .btn-primary{
-            color: black;
-            border-color: white;
-            background-color: white;
-        }
-        .btn-info{
-            color: black;
-            border-color: white;
-            background-color: white;
-        }
-    </style>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+  <style>
+    /* CSS Variables for easy theme management */
+    :root {
+      --primary-color: #6c63ff;
+      --secondary-color: #3f3d56;
+      --light-color: #ffffff;
+      --dark-color: #343a40;
+      --accent-color: #ff6584;
+      --font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Global Styles */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: var(--font-family);
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      background-color: var(--light-color);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 0.8rem 1rem;
+    }
+    .navbar.scrolled {
+      background-color: var(--primary-color);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: var(--dark-color);
+    }
+    .navbar-brand img {
+      margin-right: 0.5rem;
+    }
+    .nav-link {
+      color: var(--dark-color) !important;
+      transition: color 0.3s ease;
+    }
+    .nav-link:hover {
+      color: var(--primary-color) !important;
+    }
+
+    /* Dashboard Section */
+    .dashboard-section {
+      padding: 4rem 1rem;
+      background: linear-gradient(135deg, #e0eafc, #cfdef3);
+      position: relative;
+      z-index: 1;
+    }
+    .dashboard-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/cubes.png');
+      opacity: 0.1;
+      z-index: -1;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--dark-color);
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      margin: 0.5rem auto 0;
+      border-radius: 2px;
+    }
+
+    /* Card Styles */
+    .card-custom {
+      background-color: var(--light-color);
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      border: none;
+      animation: fadeIn 0.8s ease forwards;
+      opacity: 0;
+    }
+    /* Decorative gradient line at the top of each card */
+    .card-custom::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      transition: left 0.5s;
+    }
+    .card-custom:hover::before {
+      left: 0;
+    }
+    .card-custom:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+    .card-body {
+      padding: 2rem;
+      text-align: center;
+    }
+    .card-icon {
+      font-size: 3rem;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+    .card-custom:hover .card-icon {
+      transform: scale(1.1);
+      color: var(--secondary-color);
+    }
+    .card-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--dark-color);
+    }
+    .card-text {
+      font-size: 1rem;
+      color: #6c757d;
+      margin-bottom: 1rem;
+    }
+
+    /* Custom Button Styles */
+    .btn-custom {
+      padding: 0.5rem 1.5rem;
+      border-radius: 30px;
+      border: 2px solid transparent;
+      transition: background-color 0.3s, color 0.3s, transform 0.3s;
+    }
+    .btn-custom-primary {
+      background-color: var(--primary-color);
+      color: var(--light-color);
+    }
+    .btn-custom-primary:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+    .btn-custom-info {
+      background-color: var(--secondary-color);
+      color: var(--light-color);
+    }
+    .btn-custom-info:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+
+    /* Fade In Animation for Cards */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    /* Staggered Animation Delays */
+    .card-custom:nth-child(1) { animation-delay: 0.1s; }
+    .card-custom:nth-child(2) { animation-delay: 0.2s; }
+    .card-custom:nth-child(3) { animation-delay: 0.3s; }
+    .card-custom:nth-child(4) { animation-delay: 0.4s; }
+    .card-custom:nth-child(5) { animation-delay: 0.5s; }
+    .card-custom:nth-child(6) { animation-delay: 0.6s; }
+    .card-custom:nth-child(7) { animation-delay: 0.7s; }
+    .card-custom:nth-child(8) { animation-delay: 0.8s; }
+
+    /* Footer Styles */
+    footer {
+      background-color: var(--dark-color);
+      color: #ddd;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    footer p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Enhancements */
+    @media (max-width: 768px) {
+      .section-title {
+        font-size: 2rem;
+      }
+      .card-icon {
+        font-size: 2.5rem;
+      }
+    }
+
+    /* Additional Mobile Responsiveness for small devices */
+    @media (max-width: 576px) {
+      .navbar-brand {
+        font-size: 1.25rem;
+      }
+      .dashboard-section {
+        padding: 2rem 0.5rem;
+      }
+      .section-title {
+        font-size: 1.75rem;
+      }
+      .card-body {
+        padding: 1rem;
+      }
+      .card-icon {
+        font-size: 2rem;
+      }
+      .btn-custom {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Navbar Section -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="https://res.cloudinary.com/dlsljudqc/image/upload/v1737883768/hxb3mcebr8xirsj7mh2m.png" alt="University Logo" width="30" height="30" class="d-inline-block align-top"> Home
-            </a>
-            <a href="{{ url_for('contact_us') }}" class="btn btn-light ml-auto">Contact Us</a>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="hero bg-primary text-white text-center py-5">
-        <div class="container">
-            <h1 class="display-4">Welcome to the University Management System</h1>
-            <p class="lead">Manage Students, Professors, Courses, and Fees all in one place!</p>
-            <a href="{{ url_for('view_students') }}" class="btn btn-light btn-lg">Get Started</a>
-        </div>
-    </header>
-
-    <!-- Main Content Section -->
-    <div class="container my-5">
-        <h2 class="text-center mb-4">Dashboard</h2>
-
-        <!-- Add and View Students Section -->
-        <div class="row justify-content-center">
-            <div class="col-md-4 mb-3">
-                <div class="card custom-card">
-                    <div class="card-body">
-                        <a href="{{ url_for('add_student') }}" class="btn btn-primary btn-block">Add Student</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="card custom-card">
-                    <div class="card-body">
-                        <a href="{{ url_for('view_students') }}" class="btn btn-info btn-block">View Students</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Add and View Professors Section -->
-        <div class="row justify-content-center">
-            <div class="col-md-4 mb-3">
-                <div class="card custom-card">
-                    <div class="card-body">
-                        <a href="{{ url_for('add_professor') }}" class="btn btn-primary btn-block">Add Professor</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="card custom-card">
-                    <div class="card-body">
-                        <a href="{{ url_for('view_professors') }}" class="btn btn-info btn-block">View Professors</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Add and View Courses Section -->
-        <div class="row justify-content-center">
-            <div class="col-md-4 mb-3">
-                <div class="card custom-card">
-                    <div class="card-body">
-                        <a href="{{ url_for('add_course') }}" class="btn btn-primary btn-block">Add Course</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="card custom-card">
-                    <div class="card-body">
-                        <a href="{{ url_for('view_courses') }}" class="btn btn-info btn-block">View Courses</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Assign Student to Course Section -->
-        <div class="row justify-content-center">
-            <div class="col-md-4 mb-3">
-                <div class="card custom-card">
-                    <div class="card-body">
-                        <a href="{{ url_for('assign_student') }}" class="btn btn-primary btn-block">Assign Student to Course</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="https://res.cloudinary.com/ds6um53cx/image/upload/v1739173072/mlea1txwo73qvsibhls0.png" alt="University Logo" width="40" height="40" class="me-2">
+        University
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('contact_us') }}">Contact Us</a>
+          </li>
+        </ul>
+      </div>
     </div>
+  </nav>
 
-    <!-- Bootstrap JS, Popper.js, and jQuery (Optional) -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- Dashboard Section -->
+  <section class="dashboard-section mt-5 pt-5">
+    <div class="container">
+      <h2 class="section-title">Dashboard</h2>
+      <div class="row g-4 mt-4">
+        <!-- Add Student -->
+        <div class="col-md-4">
+          <div class="card card-custom">
+            <div class="card-body">
+              <i class="fas fa-user-plus card-icon"></i>
+              <h5 class="card-title">Add Student</h5>
+              <p class="card-text">Register a new student into the system.</p>
+              <a href="{{ url_for('add_student') }}" class="btn btn-custom btn-custom-primary">Go</a>
+            </div>
+          </div>
+        </div>
+        <!-- View Students -->
+        <div class="col-md-4">
+          <div class="card card-custom">
+            <div class="card-body">
+              <i class="fas fa-users card-icon"></i>
+              <h5 class="card-title">View Students</h5>
+              <p class="card-text">Browse and manage student records.</p>
+              <a href="{{ url_for('view_students') }}" class="btn btn-custom btn-custom-info">Go</a>
+            </div>
+          </div>
+        </div>
+        <!-- Add Professor -->
+        <div class="col-md-4">
+          <div class="card card-custom">
+            <div class="card-body">
+              <i class="fas fa-chalkboard-teacher card-icon"></i>
+              <h5 class="card-title">Add Professor</h5>
+              <p class="card-text">Introduce a new professor to the faculty.</p>
+              <a href="{{ url_for('add_professor') }}" class="btn btn-custom btn-custom-primary">Go</a>
+            </div>
+          </div>
+        </div>
+        <!-- View Professors -->
+        <div class="col-md-4">
+          <div class="card card-custom">
+            <div class="card-body">
+              <i class="fas fa-user-tie card-icon"></i>
+              <h5 class="card-title">View Professors</h5>
+              <p class="card-text">Explore and update professor details.</p>
+              <a href="{{ url_for('view_professors') }}" class="btn btn-custom btn-custom-info">Go</a>
+            </div>
+          </div>
+        </div>
+        <!-- Add Course -->
+        <div class="col-md-4">
+          <div class="card card-custom">
+            <div class="card-body">
+              <i class="fas fa-book-open card-icon"></i>
+              <h5 class="card-title">Add Course</h5>
+              <p class="card-text">Create and schedule new courses.</p>
+              <a href="{{ url_for('add_course') }}" class="btn btn-custom btn-custom-primary">Go</a>
+            </div>
+          </div>
+        </div>
+        <!-- View Courses -->
+        <div class="col-md-4">
+          <div class="card card-custom">
+            <div class="card-body">
+              <i class="fas fa-book card-icon"></i>
+              <h5 class="card-title">View Courses</h5>
+              <p class="card-text">Review and manage course listings.</p>
+              <a href="{{ url_for('view_courses') }}" class="btn btn-custom btn-custom-info">Go</a>
+            </div>
+          </div>
+        </div>
+        <!-- Assign Student to Course -->
+        <div class="col-md-4 offset-md-4">
+          <div class="card card-custom">
+            <div class="card-body">
+              <i class="fas fa-link card-icon"></i>
+              <h5 class="card-title">Assign Student to Course</h5>
+              <p class="card-text">Enroll students into their chosen courses.</p>
+              <a href="{{ url_for('assign_student') }}" class="btn btn-custom btn-custom-info">Go</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 University Management System. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Navbar scroll effect: changes background when scrolling
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+  </script>
 </body>
 </html>
